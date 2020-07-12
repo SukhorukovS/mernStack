@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,12 +13,12 @@ export const Register = () => {
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if(password !== password2) {
       console.log('Passwords do not match');
     } else {
-      console.log(formData);
+      console.log('SUCCESS');
     }
   }
 
@@ -38,15 +39,15 @@ export const Register = () => {
               </small>
             </div>
             <div className="form-group">
-              <input type="password" placeholder="Password" minlength="6" name="password" value={password} onChange={e => onChange(e)} />
+              <input type="password" placeholder="Password" minLength="6" name="password" value={password} onChange={e => onChange(e)} />
             </div>
             <div className="form-group">
-              <input type="password" placeholder="Confirm Password" minlength="6" name="password2" value={password2} onChange={e => onChange(e)} />
+              <input type="password" placeholder="Confirm Password" minLength="6" name="password2" value={password2} onChange={e => onChange(e)} />
             </div>
             <input type="submit" value="Register" className="btn btn-primary"/>
           </form>
           <p className="my-1">
-            Already have an account? <a href="login.html">Sign In</a>
+            Already have an account? <Link to="/login">Sign In</Link>
           </p>
     </Fragment>
   )
