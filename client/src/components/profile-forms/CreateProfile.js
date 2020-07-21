@@ -1,9 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { сreateProfile } from '../../actions/profile';
 
 
-const CreateProfile = props => {
+const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -38,6 +39,11 @@ const CreateProfile = props => {
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value});
 
+  const onSubmit = e => {
+    e.preventDefault();
+    createProfile(formData, history);
+  }
+
   return (
     <Fragment>
       <h1 className="large text-primary">
@@ -47,7 +53,7 @@ const CreateProfile = props => {
         <i className="fas fa-user"></i> Let's get some information to make your profile stand out
       </p>
       <small>* = required fields</small>
-      <form className="form">
+      <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           <select name="status" value={status} onChange={e => onChange(e)}>
             <option value="0">* Select Professional Status</option>
@@ -145,10 +151,14 @@ const CreateProfile = props => {
       </form>
     </Fragment>
   )
-}
+};
 
 CreateProfile.propTypes = {
-
+  createProfile: PropTypes.func.isRequired, 
 }
 
-export default CreateProfile
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { сreateProfile })(CreateProfile);
