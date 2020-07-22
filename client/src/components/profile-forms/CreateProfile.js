@@ -1,10 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { сreateProfile } from '../../actions/profile';
+import { createProfile } from '../../actions/profile';
 
 
-const CreateProfile = ({ createProfile, history }) => {
+const ProfileForms = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -153,7 +153,7 @@ const CreateProfile = ({ createProfile, history }) => {
   )
 };
 
-CreateProfile.propTypes = {
+ProfileForms.propTypes = {
   createProfile: PropTypes.func.isRequired, 
 }
 
@@ -161,4 +161,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { сreateProfile })(CreateProfile);
+export default connect(mapStateToProps, { createProfile })(ProfileForms);
